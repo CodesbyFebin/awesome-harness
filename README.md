@@ -70,6 +70,58 @@ This repository aggregates the essential pieces into one reference so you can un
 
 ---
 
+## Darwin Mode — Freeze the Model, Evolve the Harness
+
+**Darwin Mode** (`@metaharness/darwin`) is the self-improvement engine of the MetaHarness stack.
+
+> Keep your model frozen. Evolve the operating system around it (planners, context builders, reviewers, routing policies, verification steps, memory strategies, repair loops) so a cheap model performs like an expensive one.
+
+### Core Idea
+- Model weights stay fixed.
+- The harness configuration is mutated, tested in a sandbox, and only variants that measurably improve cost / accuracy / latency / safety are promoted.
+- Winners become part of an evolutionary archive. Improvements compound.
+- Safe by default: no network, no API key required for pure refactor/tuning paths; safety inspector + promotion gate.
+
+### Key Measured Results (SWE-bench Lite, conformant)
+- Open-loop cheap model: ~7.7%
+- After successive harness evolution + repair + routing + multi-tier: **58.3%** (same model, ~7.6× improvement)
+- Single interactive trajectory (DeepSeek-V4-Flash): **34.0%** at ~$0.005/instance
+- Test-Driven Repair (given the acceptance test): **68.3%** at ~$0.01–0.08/instance
+- Best-of-3 + LLM-judge selection: ~52% (pilot)
+
+Sits on the cost-Pareto frontier versus systems that spend $0.1–$2.5+ per instance.
+
+### Two Main Modes (ADR-175)
+| Mode | When | What you get |
+|------|------|--------------|
+| **Test-Driven Repair** (default) | You have a failing CI test | Verified-fix PR (CI Autofixer) |
+| **Conformant** (`--no-test-oracle`) | Ticket only, no test | Agent writes its own `reproduce_bug.py` + MCTS search |
+
+### How to Use
+```bash
+# In a MetaHarness-generated project
+npm run evolve
+
+# Or directly
+npx @metaharness/darwin
+npm install @metaharness/darwin
+
+# CLI evolve verb
+metaharness-darwin evolve <repo> [--generations N] [--children N] [--selection score|quality-diversity|...]
+```
+
+Every scaffold from `npx metaharness` ships with Darwin Mode wired in by default (`--no-darwin` to skip).
+
+### Related Extensions
+- **Darwin Shield** (ADR-155): same thesis applied to defensive vulnerability discovery (Semgrep + property fuzzer oracles).
+- **Weight-EFT**: complementary lever — distills gold-resolved archives into LoRA tunes on the cheap tier so escalations to frontier models happen less often. The tune itself is a gene Darwin can prune.
+- **GEPA**: learning harness that evolves policy genomes against scored task corpora (holdout promotion only).
+- Integrated into Ruflo as an optional, removable augmentation (ADR-153).
+
+Lineage: Darwin Gödel Machine style — mutate the agent source, empirically validate each variant.
+
+---
+
 ## Quick Start Paths
 
 ### 1. Use the Original Harness (Ruflo)
@@ -101,6 +153,11 @@ cargo add ruvector   # or npm / python equivalents
 ### 4. Run Under Hardware Isolation
 Use RVM for capability-based, bare-metal agent execution.
 
+### 5. Evolve the Harness
+```bash
+npm run evolve   # inside a MetaHarness scaffold
+```
+
 ---
 
 ## Architecture Overview
@@ -116,13 +173,13 @@ Use RVM for capability-based, bare-metal agent execution.
    +------v------+                       +------v------+
    |   Ruflo     |                       | MetaHarness |
    |  (Harness)  | <--- generates --->   |  (Factory)  |
-   +------+------+                       +-------------+
-          |
-          v
-   +------+------+     +----------+     +----------+
-   | RuVector    | <--> | Memory   | <--> | Agents   |
-   | (Vector+GNN)|     | Layers   |     | (Swarms) |
-   +------+------+     +----------+     +----------+
+   +------+------+                       +------|------+
+          |                                     |
+          v                                     v
+   +------+------+     +----------+     +------v------+
+   | RuVector    | <--> | Memory   | <--> | Darwin Mode|
+   | (Vector+GNN)|     | Layers   |     |  (Evolve)  |
+   +------+------+     +----------+     +-------------+
           |
           v
    +------+------+     +----------+
@@ -136,6 +193,7 @@ Use RVM for capability-based, bare-metal agent execution.
 ## Integration Notes
 
 - **ADR-150** in Ruflo makes MetaHarness an optional, removable augmentation. Ruflo works without it.
+- **ADR-153** covers Darwin Mode integration into Ruflo (optional, graceful degradation).
 - Generated harnesses from MetaHarness are fully owned by you (your branding, your `npx` CLI, witness-signed).
 - Memory layers (RuVector / agentdb) are designed to be shared across agents and improve with usage.
 - Evolution (Darwin Mode, Dream Machine, Autogenous) is evidence-gated and reversible.
