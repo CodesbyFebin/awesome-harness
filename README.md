@@ -76,6 +76,8 @@ This repository aggregates the essential pieces into one reference so you can un
 
 > Keep your model frozen. Evolve the operating system around it (planners, context builders, reviewers, routing policies, verification steps, memory strategies, repair loops) so a cheap model performs like an expensive one.
 
+**Full reference:** [DARWIN.md](DARWIN.md) (mutation surfaces, scoring gate, safety model, CLI flags, GEPA, evolutionary stack, API).
+
 ### Core Idea
 - Model weights stay fixed.
 - The harness configuration is mutated, tested in a sandbox, and only variants that measurably improve cost / accuracy / latency / safety are promoted.
