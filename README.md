@@ -1,10 +1,23 @@
 # Awesome Harness — Master Merge of the ruvnet Agent Ecosystem
 
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:010409,100:00ff00&height=200&section=header&text=Awesome%20Harness&fontSize=48&fontAlignY=35&desc=The%20complete%20open-source%20agent%20harness%20stack&descAlignY=60&descSize=18" alt="Awesome Harness Hero Banner" width="100%" />
+</p>
+
+<p align="center">
+  <a href="https://github.com/ruvnet/ruflo"><img src="https://img.shields.io/badge/Ruflo-76k%20stars-00ff00?style=for-the-badge&logo=github" alt="Ruflo" /></a>
+  <a href="https://github.com/ruvnet/metaharness"><img src="https://img.shields.io/badge/MetaHarness-factory-00ff00?style=for-the-badge" alt="MetaHarness" /></a>
+  <a href="https://github.com/ruvnet/RuVector"><img src="https://img.shields.io/badge/RuVector-memory-00ff00?style=for-the-badge" alt="RuVector" /></a>
+  <a href="DARWIN.md"><img src="https://img.shields.io/badge/Darwin%20Mode-evolve-00ff00?style=for-the-badge" alt="Darwin" /></a>
+</p>
+
 > **The complete open-source agent harness stack.**
 >
 > Curated master catalog and integration guide for Reuven Cohen (rUv / ruvnet) / Cognitum One's essential repositories that form the modern agent harness ecosystem.
 >
 > Built as a living reference for systems engineers who want to deploy, extend, and govern multi-agent systems with Claude Code, Codex, Hermes, and beyond.
+>
+> Aesthetic: near-black evidence-console / phosphor-green terminal. Systems that prove what happened.
 
 ---
 
@@ -23,7 +36,7 @@ The ruvnet stack is the most mature open-source realization of this idea, with:
 - **RVM** as the agentic virtual machine / sandbox
 - Supporting control planes, evolution engines, and domain verticals
 
-This repository aggregates the essential pieces into one reference so you can understand, install, and compose them.
+This repository aggregates the essential pieces into one reference so you can understand, install, and compose them. It is not a monorepo of the original code; it is the map and the integration manual.
 
 ---
 
@@ -160,6 +173,14 @@ Use RVM for capability-based, bare-metal agent execution.
 npm run evolve   # inside a MetaHarness scaffold
 ```
 
+### 6. Full Local Clone of Essentials
+```bash
+git clone https://github.com/ruvnet/ruflo.git
+git clone https://github.com/ruvnet/metaharness.git
+git clone https://github.com/ruvnet/RuVector.git
+git clone https://github.com/ruvnet/rvm.git
+```
+
 ---
 
 ## Architecture Overview
@@ -190,6 +211,15 @@ npm run evolve   # inside a MetaHarness scaffold
    +-------------+
 ```
 
+### Composition Patterns
+
+1. **Start with Ruflo** for an immediate multi-agent swarm with memory and federation.
+2. **Generate a focused harness** with MetaHarness when you want your own branding and reduced surface.
+3. **Plug RuVector** for shared, self-improving memory across agents.
+4. **Evolve with Darwin** so the harness itself improves on your workload.
+5. **Isolate with RVM** when untrusted code or peer agents must run under hardware capabilities.
+6. **Govern with ruClip** when you need org-level budget, approval, and audit.
+
 ---
 
 ## Integration Notes
@@ -200,6 +230,7 @@ npm run evolve   # inside a MetaHarness scaffold
 - Memory layers (RuVector / agentdb) are designed to be shared across agents and improve with usage.
 - Evolution (Darwin Mode, Dream Machine, Autogenous) is evidence-gated and reversible.
 - Hosts supported by MetaHarness: Claude Code, Codex, pi.dev, Hermes, OpenClaw, RVM, GitHub Copilot, OpenCode, Prime Agent, GitHub Actions.
+- Safety is first-class: default-deny MCP, scrubbed sandboxes, witness-signed releases, capability tokens in RVM.
 
 ---
 
@@ -225,8 +256,31 @@ Sorted roughly by relevance to the harness stack:
 16. ruvnet/RuLake
 17. ruvnet/sparc
 18. ruvnet/flow-nexus
+19. ruvnet/rudevolution
+20. ruvnet/agenticow
 
 (And ~200 more public repos covering quantum, neural, sensing, decompilers, etc.)
+
+---
+
+## Suggested Topics for This Repo
+
+```
+agent-harness
+meta-harness
+ruflo
+metaharness
+ruvector
+rvm
+darwin-mode
+agent-swarm
+mcp
+claude-code
+codex
+multi-agent
+self-improving
+open-source
+```
 
 ---
 
@@ -239,6 +293,7 @@ This is a living master reference. PRs welcome for:
 - Better integration recipes
 - Architecture diagrams
 - Submodule or monorepo experiments
+- Hero banner refinements
 
 ---
 
@@ -253,3 +308,8 @@ This is a living master reference. PRs welcome for:
 **Long live open source.**
 
 Built by CodesbyFebin — systems that prove what happened.
+
+---
+
+*Suggested repository description:*  
+Master catalog and integration guide for the ruvnet / Cognitum One open-source agent harness ecosystem (Ruflo, MetaHarness, RuVector, Darwin Mode, RVM, ruClip).
